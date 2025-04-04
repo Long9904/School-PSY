@@ -1,6 +1,6 @@
 package com.main.project.enums;
 
-public enum UserEnum {
+public enum UserRoleEnum {
     ADMIN,
     STUDENT,
     PARENT,

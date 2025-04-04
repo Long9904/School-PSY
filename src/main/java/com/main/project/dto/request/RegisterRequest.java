@@ -13,6 +13,8 @@ public class RegisterRequest {
 
     private String email;
 
+    private String password;
+
     private LocalDate dateOfBirth;
 
     private String gender;
@@ -20,4 +22,6 @@ public class RegisterRequest {
     private String phoneNumber;
 
     private String address;
+
+    private String role;
 }
