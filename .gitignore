@@ -34,4 +34,4 @@ build/
 
 
 # Ignore chỉ application.properties, không ảnh hưởng đến thư mục resources
-src/main/resources/application.properties
+src/main/resources/application-dev.properties
