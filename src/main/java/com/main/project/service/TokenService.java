@@ -35,7 +35,7 @@ public class TokenService {
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
-                .subject(user.getId().toString())
+                .subject(user.getEmail())
                 .claim("role", user.getRole())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
