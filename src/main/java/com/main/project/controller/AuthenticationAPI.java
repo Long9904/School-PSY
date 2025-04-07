@@ -23,6 +23,7 @@ public class AuthenticationAPI {
 
     @GetMapping("/login")
     public ResponseEntity<?> login() {
-        return ResponseEntity.ok("Login successful");
+        return ResponseEntity.ok("Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo" +
+                " Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo Hahaha trí béo");
     }
 }
