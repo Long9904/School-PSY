@@ -32,7 +32,6 @@ public class AuthenticationService implements UserDetailsService {
 
 
     @Override
-
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
@@ -44,16 +43,14 @@ public class AuthenticationService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
         // Set role by request type
-        if(registerRequest.getRole().equalsIgnoreCase("admin")) {
-            user.setRole(UserRoleEnum.ADMIN);
+        if(registerRequest.getRole().equalsIgnoreCase("student")) {
+            user.setRole(UserRoleEnum.STUDENT);
         } else if(registerRequest.getRole().equalsIgnoreCase("parent")) {
             user.setRole(UserRoleEnum.PARENT);
         } else if(registerRequest.getRole().equalsIgnoreCase("psychologist")) {
             user.setRole(UserRoleEnum.PSYCHOLOGIST);
-        } else if(registerRequest.getRole().equalsIgnoreCase("student")) {
-            user.setRole(UserRoleEnum.STUDENT);
         } else {
-            return "Role not found"; // Return error message
+            return "Role not found";
         }
         authenticationRepository.save(user);
         return "Register successfully";
