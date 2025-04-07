@@ -18,7 +18,8 @@ public class UserUtils implements ApplicationContextAware {
     }
 
     public User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return authenticationRepository.findByUsername(username).orElseThrow();
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return authenticationRepository.findUserByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
