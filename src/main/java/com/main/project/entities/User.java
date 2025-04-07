@@ -3,10 +3,7 @@ package com.main.project.entities;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.main.project.enums.UserRoleEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +27,7 @@ public class User implements UserDetails {
 
     private String fullName;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -38,6 +36,7 @@ public class User implements UserDetails {
 
     private String gender;
 
+    @Column(unique = true)
     private String phoneNumber;
 
     private String address;
