@@ -1,7 +1,7 @@
 package com.main.project.enums;
 
 public enum UserRoleEnum {
-    ADMIN,
+    MANAGER,
     STUDENT,
     PARENT,
     PSYCHOLOGIST

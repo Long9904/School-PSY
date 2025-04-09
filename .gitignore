@@ -32,6 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 
-
-# Ignore chỉ application.properties, không ảnh hưởng đến thư mục resources
+#Git ignore
 src/main/resources/application-dev.properties

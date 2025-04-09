@@ -7,5 +7,6 @@ import java.util.Optional;
 
 public interface AuthenticationRepository extends JpaRepository<User, Long> {
     Optional<User> findUserById(Long id);
-    Optional<User> findUserByEmail(String email);
+    Optional<User> findUserByStudentEmail(String studentEmail);
+    Optional<User> findUserByParentEmail(String parentEmail);
 }

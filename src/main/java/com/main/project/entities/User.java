@@ -28,7 +28,10 @@ public class User implements UserDetails {
     private String fullName;
 
     @Column(unique = true)
-    private String email;
+    private String studentEmail;
+
+    @Column(unique = true)
+    private String parentEmail;
 
     private String password;
 
@@ -41,6 +44,7 @@ public class User implements UserDetails {
 
     private String address;
 
+    @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@class")
@@ -57,7 +61,12 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        if (this.role == UserRoleEnum.STUDENT) {
+            return this.studentEmail;
+        } else if (this.role == UserRoleEnum.PARENT) {
+            return this.parentEmail;
+        }
+        return "";
     }
 
     @Override
