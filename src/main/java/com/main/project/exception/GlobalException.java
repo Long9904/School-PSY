@@ -41,4 +41,13 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
     }
 
+    // Xử lí lỗi trùng lặp
+    @ExceptionHandler(DuplicateException.class)
+    public ResponseEntity<Map<String, Object>> handleDuplicate(DuplicateException ex) {
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("message", ex.getMessage());
+        msg.put("details", ex.getDetails());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(msg);
+    }
+
 }
