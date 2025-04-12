@@ -70,7 +70,9 @@ public class MomoPaymentService {
                 "&requestId=" + requestId +
                 "&requestType=captureWallet";
 
+        System.out.println("Raw Signature: " + rawSignature); // Thêm dòng log này
         String signature = MomoSignatureUtil.signSHA256(rawSignature, secretKey);
+        System.out.println("Signature: " + signature); // Thêm dòng log này
 
         MomoPaymentRequest request = new MomoPaymentRequest(
                 partnerCode, accessKey, requestId, amount,
