@@ -35,7 +35,7 @@ public class TokenService {
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
-                .subject(user.getId().toString())
+                .subject(user.getEmail())
                 .claim("role", user.getRole())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
@@ -49,9 +49,9 @@ public class TokenService {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
-        String userId = claims.getSubject();
-        Long id = Long.parseLong(userId);
-        return authenticationRepository.findUserById(id).orElseThrow(() -> new NotFoundException("User not found"));
+        String email = claims.getSubject();
+        return authenticationRepository.findUserByEmail(email)
+                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 
 }

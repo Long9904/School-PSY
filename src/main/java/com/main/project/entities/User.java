@@ -1,8 +1,10 @@
 package com.main.project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.main.project.enums.UserRoleEnum;
+import com.main.project.enums.UserStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,10 +31,7 @@ public class User implements UserDetails {
     private String fullName;
 
     @Column(unique = true)
-    private String studentEmail;
-
-    @Column(unique = true)
-    private String parentEmail;
+    private String email;
 
     private String password;
 
@@ -39,13 +39,23 @@ public class User implements UserDetails {
 
     private String gender;
 
-    @Column(unique = true)
-    private String phoneNumber;
+    private String phoneNumber; //Phone can not be unique because it can be used by multiple users(parents and children)
 
     private String address;
 
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatusEnum status = UserStatusEnum.ACTIVE;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private List<ParentStudent> children; // List of children linked to the parent
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    private ParentStudent parentLink; // Link to the parent of the student
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@class")
     @JsonSubTypes({
@@ -61,12 +71,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        if (this.role == UserRoleEnum.STUDENT) {
-            return this.studentEmail;
-        } else if (this.role == UserRoleEnum.PARENT) {
-            return this.parentEmail;
-        }
-        return "";
+       return this.email;
     }
 
     @Override

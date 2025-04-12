@@ -1,6 +1,8 @@
 package com.main.project.controller;
 
+import com.main.project.dto.request.LoginRequest;
 import com.main.project.dto.request.RegisterRequest;
+import com.main.project.dto.response.LoginResponse;
 import com.main.project.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,8 +26,9 @@ public class AuthenticationAPI {
         return ResponseEntity.ok(notify);
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<?> login() {
-        return ResponseEntity.ok("Login successful");
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        LoginResponse loginResponse = authenticationService.login(loginRequest);
+        return ResponseEntity.ok(loginResponse);
     }
 }

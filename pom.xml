@@ -112,6 +112,12 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- Nếu bạn ký HMAC SHA256 bằng Java (dùng cho signature) -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.15</version> <!-- hoặc mới hơn -->
+		</dependency>
 
 	</dependencies>
 

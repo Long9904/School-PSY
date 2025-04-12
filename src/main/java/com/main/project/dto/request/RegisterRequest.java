@@ -11,17 +11,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class RegisterRequest {
 
-    @Schema(description = "Full name of the user", example = "Long Vu")
+    @Schema(description = "Full name of the user", example = "Long Cha")
     @Size(min = 1, max = 30, message = "Full name must be between 1 and 30 characters")
     private String fullName;
 
-    @Schema(description = "Student email", example = "studentEmail@gmail.com")
+    @Schema(description = "Email", example = "registerEmail@gmail.com")
     @Email(message = "Email should be valid")
-    private String studentEmail;
-
-    @Schema(description = "Parent email", example = "parentEmail@gmail.com")
-    @Email(message = "Email should be valid")
-    private String parentEmail;
+    private String email;
 
     @Schema(description = "Password", example = "Password123")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$",
@@ -49,5 +45,13 @@ public class RegisterRequest {
     @Schema(description = "Student | Parent", example = "Student")
     @Pattern(regexp = "^(Student|Parent)$", message = "Role must be 'Student', 'Parent'")
     private String role;
+
+    @Schema(description = "Partner Email (Student or Parent)", example = "partnerEmail@gmail.com")
+    @Email(message = "Email should be valid")
+    private String partnerEmail; // Email of the parent or spouse (if any)
+
+    @Schema(description = "Partner Full Name (Student or Parent)", example = "Long Con")
+    @Size(min = 1, max = 30, message = "Full name must be between 1 and 30 characters")
+    private String partnerFullName; // Full name of the parent or student (if any)
 
 }
