@@ -19,8 +19,8 @@ public class UserUtils implements ApplicationContextAware {
     }
 
     public static User getCurrentUser() {
-        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-        return authenticationRepository.findUserById(Long.valueOf(userId))
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return authenticationRepository.findUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
